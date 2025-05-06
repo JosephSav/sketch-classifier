@@ -317,14 +317,8 @@ def predict_sketch(image):
         # Convert numpy array to PIL image
         image_pil = Image.fromarray(image_data.astype(np.uint8))
 
-        # Debug: Check the image visually before preprocessing
-        image_pil.show()
-
         # Preprocess to match training conditions
         image_pil = preprocess_like_quickdraw(image_pil)
-
-        # Debug: Check the processed image visually
-        image_pil.show()
 
         # Convert to tensor
         image_tensor = transforms.ToTensor()(image_pil).unsqueeze(0).to(device)
