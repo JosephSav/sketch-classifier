@@ -3,7 +3,7 @@ import torch.optim as optim
 from torch.utils.data import random_split, DataLoader
 from torch.nn.modules import loss as ls
 from torchvision import transforms
-from dataset import SketchDataset
+from dataset import SketchDataset, SketchDatasetFromCloud
 
 from modules import CNN
 
@@ -18,7 +18,8 @@ def train_loop():
                    "cake", "cloud", "crown", "duck", "fish"
                    ]
     transform = transforms.ToTensor()
-    dataset = SketchDataset("quickdraw_dataset/full/numpy_bitmap", class_names, transform=transform)
+    # dataset = SketchDatasetFromCloud("quickdraw_dataset/full/numpy_bitmap", class_names, transform=transform)
+    dataset = SketchDataset("../zzDatasets/quickdraw_downloads", class_names, transform=transform)
 
     train_size = int(0.7 * len(dataset))
     val_size = int(0.15 * len(dataset))
