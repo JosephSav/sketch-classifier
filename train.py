@@ -28,9 +28,9 @@ def train_loop():
     # Create splits
     train_dataset, val_dataset, test_dataset = random_split(dataset, [train_size, val_size, test_size])
 
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=32)
-    test_loader = DataLoader(test_dataset, batch_size=32)
+    train_loader = DataLoader(train_dataset, batch_size=256, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=256)
+    test_loader = DataLoader(test_dataset, batch_size=256)
 
     # for i, (images, labels) in enumerate(train_loader):
     #     for idx in range(images.size[0]):
@@ -39,9 +39,13 @@ def train_loop():
 
     model = CNN(len(class_names)).to(device)
     criterion = ls.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=1e-3)
+    optimizer = optim.Adam(model.parameters(), lr=1e-4)
 
-    num_epochs = 10
+    num_epochs = 100
+
+    best_val_loss = float('inf')
+    patience = 5
+    epochs_without_improvement = 0
 
     for epoch in range(num_epochs):
         print(f"Epoch {epoch+1}/{num_epochs}")
@@ -88,6 +92,24 @@ def train_loop():
         print(f"Validation Loss: {epoch_val_loss:.4f}")
         print(correct)
 
-train_loop()
+        # Early stopping logic
+        if epoch_val_loss < best_val_loss:
+            best_val_loss = epoch_val_loss
+            epochs_without_improvement = 0
+            # Optionally, save best model here
+            torch.save(model.state_dict(), 'best_model.pth')
+        else:
+            epochs_without_improvement += 1
+            print(f"No improvement for {epochs_without_improvement} epoch(s).")
+
+            if epochs_without_improvement >= patience:
+                print("Early stopping triggered.")
+                break
+
+    torch.save(model.state_dict(), 'model.pth')
+
+
+if __name__ == "__main__":
+    train_loop()
 
 

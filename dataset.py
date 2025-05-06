@@ -32,7 +32,7 @@ class SketchDatasetFromCloud(Dataset):
         return image, label
     
 class SketchDataset(Dataset):
-    def __init__(self, local_path_prefix, class_names, transform=None, limit_per_class=1000):
+    def __init__(self, local_path_prefix, class_names, transform=None, limit_per_class=10000):
         self.samples = []
         self.transform = transform
 
