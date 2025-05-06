@@ -31,17 +31,17 @@ class SketchDataset(Dataset):
         return image, label
     
 
-# Example usage
-class_names = ["cat", "apple", "dog"]
-transform = transforms.ToTensor()
-dataset = SketchDataset("quickdraw_dataset/full/numpy_bitmap", class_names, transform=transform)
-loader = DataLoader(dataset, batch_size=4, shuffle=True)
+# # Example usage
+# class_names = ["cat", "apple", "dog"]
+# transform = transforms.ToTensor()
+# dataset = SketchDataset("quickdraw_dataset/full/numpy_bitmap", class_names, transform=transform)
+# loader = DataLoader(dataset, batch_size=4, shuffle=True)
 
-for batch_idx, (images, labels) in enumerate(loader):
-    for i in range(images.size(0)):
-        plt.imshow(images[i][0], cmap='gray')
-        plt.title(f"Label: {class_names[labels[i]]}")
-        plt.show()
+# for batch_idx, (images, labels) in enumerate(loader):
+#     for i in range(images.size(0)):
+#         plt.imshow(images[i][0], cmap='gray')
+#         plt.title(f"Label: {class_names[labels[i]]}")
+#         plt.show()
     
-    if batch_idx == 3:  # stop after 2 batches
-        break
+#     if batch_idx == 3:  # stop after 2 batches
+#         break

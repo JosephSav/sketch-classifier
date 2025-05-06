@@ -2,7 +2,7 @@ from torch import nn
 import torch.nn.functional as f
 
 class CNN(nn.Module):
-    def __init__(self, num_classes, dropout):
+    def __init__(self, num_classes, dropout=0.0):
         super(CNN, self).__init__()
 
         self.conv1 = nn.Conv2d(in_channels=1, out_channels=16, kernel_size=3, stride=1, padding=1)
