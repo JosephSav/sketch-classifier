@@ -14,7 +14,7 @@ A simple CNN structure was designed, with 3 convolutional layers (with ReLU and 
 ## Files
 ```plaintext
 ├── README.md
-├── dataset.py          # Custom PyTorch Dataset for Loading and Preprocessing training sketches. Has a local and cloud dataset option.
+├── dataset.py          # Custom PyTorch Dataset. Has a local and cloud dataset option.
 ├── modules.py          # Core components and architecture of the CNN Classifier
 ├── train.py            # Training Script for the model,
 ├── utils.py            # Utility functions (none so far). Full list of categories in the Quick, Draw! Dataset
